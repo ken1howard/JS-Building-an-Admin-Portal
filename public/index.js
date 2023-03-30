@@ -25,5 +25,19 @@ function renderBook(book) {
         </div>
     `
 }
+async function updateInventory() {
+    const inventory = document.getElementById(`inventory-${book.id}`).value;
+    console.log(`Updating inventory for book ${book.quantity} to ${myTextbox.value}`);
 
+    let response = await fetch(`http://localhost:3001/listbooks/${book.quantity}`, {
+    method: 'PATCH',
+    headers: { 'Content-type': 'application/json' },
+    body: JSON.stringify({
+        'quantity': inventory
+    })
+    });
+    console.log(response)
+}
 main()
+renderBook()
+updateInventory()
